@@ -1,28 +1,38 @@
 using System;
 using System.Globalization;
+using System.Transactions;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello World! This is the Exercise5 Project.");
+        DisplayWelcomeMessage();
+
+        string userName = PromptUserName();
+        int userNumber = PromptUserNumber();
+
+        int squaredNumber = SquareNumber(userNumber);
+
+        DisplayResult(userName, squaredNumber);
     }
 
-    static void DisplayWelcome()
+    static void DisplayWelcomeMessage()
     {
         Console.WriteLine("Welcome to the program!");
     }
 
-    static string DisplayUserName()
+    static string PromptUserName()
     {
         Console.Write("Please enter your name: ");
-        return Console.ReadLine();
+        string name = Console.ReadLine();
+        return name;
     }
 
     static int PromptUserNumber()
     {
         Console.Write("Please enter your favorite number:  ");
-        return int.Parse(Console.ReadLine());
+        int number = int.Parse(Console.ReadLine());
+        return number;
     }
 
     static int SquareNumber(int number)
@@ -31,9 +41,9 @@ class Program
         return square;
     }
 
-    static void DisplayResult(string name, int squareNumber)
+    static void DisplayResult(string name, int square)
     {
-        Console.WriteLine($"{name}, the square of your number is {squareNumber}");
+        Console.WriteLine($"{name}, the square of your number is {square}");
     }
 
 }
