@@ -12,5 +12,4 @@ using System;
     {
         Console.WriteLine($"{_jobTitle} ({_startYear}-{_endYear})");
     }
-
     }
