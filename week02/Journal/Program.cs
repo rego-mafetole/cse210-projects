@@ -1,3 +1,5 @@
+// Added a search by date to show some creativity in this file and in the journal.cs 
+
 using System;
 
 class Program
