@@ -11,15 +11,16 @@ public class PromptGenerator
         "Evening routine: How did you spend your evening? What moment brought you peace or enjoyment?"
     };
 
+    private Random rand = new Random();
+
     public string GetRandomPrompt()
     {
-        Random rand = new Random();
         int index = rand.Next(0, _prompts.Count);
         return _prompts[index];
     }
 
-    public List<string> GetAllPrompts()
+    public List<string> GetAllPrompts(int count)
     {
-        return _prompts;
+        return _prompts.OrderBy(x => rand.Next()).Take(count).ToList();
     }
 }

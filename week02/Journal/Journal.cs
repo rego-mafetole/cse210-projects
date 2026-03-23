@@ -1,32 +1,56 @@
 using System;
 public class Journal
 {
-        private List<Entry> _entries = new List<Entry>();
+    private List<Entry> _entries = new List<Entry>();
 
-        public void AddEntry(string prompt, string response)
+    public void AddEntry(string prompt, string response)
+    {
+        Entry entry = new Entry(prompt, response);
+        _entries.Add(entry);
+    }
+
+    public void Display()
+    {
+        foreach (var entry in _entries)
         {
-            Entry entry = new Entry(prompt, response);
-            _entries.Add(entry);
+            Console.WriteLine(entry.GetDisplayText());
         }
+    }
 
-        public void Display()
+    public void Save(string filename)
+    {
+        using (StreamWriter writer = new StreamWriter(filename))
         {
             foreach (var entry in _entries)
             {
-                Console.WriteLine(entry.GetDisplayText());
+                writer.WriteLine(entry.GetFileString());
             }
         }
+    }
 
-        public void Save(string filename)
+    public void SearchEntriesByDate()
+    {
+        Console.Write("Enter date to search (YYYY-MM-DD): ");
+        if (DateTime.TryParse(Console.ReadLine(), out DateTime searchDate))
         {
-            using (StreamWriter writer = new StreamWriter(filename))
+            List<Entry> results = _entries.FindAll(entry => DateTime.Parse(entry.Date).Date == searchDate.Date);
+            if (results.Count > 0)
             {
-                foreach (var entry in _entries)
+                foreach (Entry entry in results)
                 {
-                    writer.WriteLine(entry.GetFileString());
+                    Console.WriteLine(entry.GetDisplayText());
                 }
             }
+            else
+            {
+                Console.WriteLine("No entries found for that date.");
+            }
         }
+        else
+        {
+            Console.WriteLine("Invalid date format.");
+        }
+    }
 
     public void Load(string filename)
     {

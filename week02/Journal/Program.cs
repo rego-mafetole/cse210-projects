@@ -18,7 +18,8 @@ class Program
             Console.WriteLine("2. Display");
             Console.WriteLine("3. Load");
             Console.WriteLine("4. Save");
-            Console.WriteLine("5. Quit");
+            Console.WriteLine("5. Search by date");
+            Console.WriteLine("6. Quit");
 
             Console.WriteLine("What would you like to do? ");
             string choice = Console.ReadLine();
@@ -26,8 +27,8 @@ class Program
             switch (choice)
             {
                 case "1":
-                    Console.Write("Enter prompt: ");
-                    string prompt = Console.ReadLine();
+                    string prompt = promptGenerator.GetRandomPrompt();
+                    Console.WriteLine($"Enter prompt:{prompt}");
                     Console.Write("Enter response: ");
                     string response = Console.ReadLine();
                     journal.AddEntry(prompt, response);
@@ -38,16 +39,20 @@ class Program
                     break;
 
                 case "3":
-                    journal.Save(filename);
-                    Console.WriteLine("Journal Saved.");
-                    break;
-
-                case "4":
                     journal.Load(filename);
                     Console.WriteLine("Journal loaded");
                     break;
 
+                case "4":
+                    journal.Save(filename);
+                    Console.WriteLine("Journal Saved.");
+                    break;
+
                 case "5":
+                    journal.SearchEntriesByDate();
+                    break;
+
+                case "6":
                     return;
 
                 default:
