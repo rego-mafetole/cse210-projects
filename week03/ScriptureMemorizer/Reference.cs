@@ -1,39 +1,35 @@
-using System;
-
-namespace ScriptureMemorizer
+class Reference
 {
-    public class Reference
+    private string _book;
+    private int _chapter;
+    private int _verse;
+    private int _endVerse;
+
+    public Reference(string book, int chapter, int verse)
     {
-        public string Book { get; set; }
-        public int Chapter { get; set; }
-        public int Verse { get; set; }
-        public int? EndVerse { get; set; }
+        _book = book;
+        _chapter = chapter;
+        _verse = verse;
+        _endVerse = 0;
+    }
 
-        public Reference(string book, int chapter, int verse)
+    public Reference(string book, int chapter, int startVerse, int endVerse)
+    {
+        _book = book;
+        _chapter = chapter;
+        _verse = startVerse;
+        _endVerse = endVerse;
+    }
+
+    public string GetDisplayText()
+    {
+        if (_endVerse == 0)
         {
-            Book = book;
-            Chapter = chapter;
-            Verse = verse;
+            return _book + " " + _chapter + ":" + _verse;
         }
-
-        public Reference(string book, int chapter, int startVerse, int endVerse)
+        else
         {
-            Book = book;
-            Chapter = chapter;
-            Verse = startVerse;
-            EndVerse = endVerse;
-        }
-
-        public string GetDisplayText()
-        {
-            if (EndVerse.HasValue)
-            {
-                return $"{Book} {Chapter}:{Verse}-{EndVerse}";
-            }
-            else
-            {
-                return $"{Book} {Chapter}:{Verse}";
-            }
+            return _book + " " + _chapter + ":" + _verse + "-" + _endVerse;
         }
     }
 }
