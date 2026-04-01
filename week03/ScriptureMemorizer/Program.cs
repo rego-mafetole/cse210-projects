@@ -23,6 +23,7 @@ class Program
             {
                 int index = _random.Next(library.Count);
                 Scripture scripture = library[index];
+            
     
                 while (true)
                 {
